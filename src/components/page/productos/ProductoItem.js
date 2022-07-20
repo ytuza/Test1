@@ -13,8 +13,8 @@ import ShareIcon from "@mui/icons-material/Share";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-export const ProductoItem = ({title, image, category, price, id}) => {
-
+export const ProductoItem = ({title, image, category, price, id, handleClickOpen }) => {
+  const [color, setColor] = React.useState('inherit')
   const value = useContext(DataContext);
   const addCarrito = value.addCarrito;
 
@@ -40,13 +40,20 @@ export const ProductoItem = ({title, image, category, price, id}) => {
         <Stack spacing={2} direction="row">
         <Button variant="text" onClick={() => addCarrito(id)}>Añadir al carrito</Button>
         <Button variant="contained" href={`/producto/${id}`}>Vista</Button>
+        <Button variant="outlined" onClick={handleClickOpen}>
+          360°
+        </Button>
       </Stack>
       </CardContent>
       <CardActions disableSpacing >
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton aria-label="add to favorites"
+          onClick={
+            ()=> color === 'inherit' ? setColor('error') : setColor('inherit')
+          }
+        >
+          <FavoriteIcon color={color}/>
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton onClick={() => window.open('https://www.twitter.com')} aria-label="share">
           <ShareIcon />
         </IconButton>
       </CardActions>
