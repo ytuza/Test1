@@ -30,9 +30,11 @@ export const ProductosList = () => {
 	const [items, setItems] = React.useState([]);
 
 	const [open, setOpen] = React.useState(false);
+	const [currentIndex, setCurrentIndex] = React.useState(0);
 
-	const handleClickOpen = () => {
+	const handleClickOpen = (id) => {
 		setOpen(true);
+		setCurrentIndex(id);
 	};
 
 	const handleClose = () => {
@@ -82,7 +84,7 @@ export const ProductosList = () => {
 		  <Divider sx={{paddingTop: '20px'}} />
       <Grid container spacing={8} sx={{paddingTop: '20px'}} >
           {
-			items.map(producto =>(
+			items.map((producto, index) =>(
 			<Grid item xs={12} sm={6} md={4}>
 				<ProductoItem 
 					key={producto.id}
@@ -91,7 +93,7 @@ export const ProductosList = () => {
 					category={producto.category}
 					price={producto.price}
 					id={producto.id}
-					handleClickOpen={handleClickOpen}
+					handleClickOpen={() => handleClickOpen(index)}
 				/>
 			</Grid>
 			))
@@ -103,12 +105,20 @@ export const ProductosList = () => {
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
+		maxWidth="md"
+		fullWidth
       >
-        <DialogTitle>{"Zapatilla 360°"}</DialogTitle>
+        <DialogTitle>{items[currentIndex]?.title}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-			<img src={shoes} alt={"loading .."}/>
+          <DialogContentText id="alert-dialog-slide-description" sx={{display: 'flex', justifyContent: 'space-around'}}>
+			<img width="500" src={items[currentIndex]?.image} alt={"loading .."}/>
           </DialogContentText>
+		  <DialogContentText>
+		  	Suela de goma sintética importada. El eje mide aproximadamente 0-6
+			pulgadas desde el arco. La plataforma mide aproximadamente 1 pulgada. La
+			apertura de la bota mide aproximadamente 6-12 pulgadas alrededor de los
+			zapatos de ante inspirados en la corte con acolchado suave para una comodidad casual
+		  </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cerrar</Button>

@@ -13,7 +13,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-export const ProductoItem = ({title, image, category, price, id, handleClickOpen }) => {
+export const ProductoItem = ({title, image, category, price, id, handleClickOpen}) => {
   const [color, setColor] = React.useState('inherit')
   const value = useContext(DataContext);
   const addCarrito = value.addCarrito;
