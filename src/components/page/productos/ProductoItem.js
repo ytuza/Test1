@@ -13,13 +13,13 @@ import ShareIcon from "@mui/icons-material/Share";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-export const ProductoItem = ({title, image, category, price, id, handleClickOpen}) => {
+export const ProductoItem = ({title, image, category, price, id, handleClickOpen, handle360ClickOpen}) => {
   const [color, setColor] = React.useState('inherit')
   const value = useContext(DataContext);
   const addCarrito = value.addCarrito;
 
   return (
-    <Card sx={{ maxWidth: 400 }}>
+    <Card sx={{ maxWidth: 400 , borderRadius: 6}}>
       <CardMedia
         component="img"
         height="200"
@@ -37,10 +37,12 @@ export const ProductoItem = ({title, image, category, price, id, handleClickOpen
         <Typography  gutterBottom variant="h5" component="div">
           $ {price}
         </Typography>
-        <Stack spacing={2} direction="row">
+        <Stack spacing={2} direction="row" sx={{zIndex:-10}}>
         <Button variant="text" onClick={() => addCarrito(id)}>Añadir al carrito</Button>
-        <Button variant="contained" href={`/producto/${id}`}>Vista</Button>
-        <Button variant="outlined" onClick={handleClickOpen}>
+        <Button variant="contained" onClick={handleClickOpen}
+          // href={`/producto/${id}`}
+        >Vista</Button>
+        <Button variant="outlined" onClick={handle360ClickOpen}>
           360°
         </Button>
       </Stack>

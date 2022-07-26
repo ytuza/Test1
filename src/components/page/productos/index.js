@@ -16,7 +16,23 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import Button from '@mui/material/Button';
-import shoes from '../../../shoes360.gif'
+import img1 from '../../../image360/img1.gif';
+import img2 from '../../../image360/img2.gif';
+import img3 from '../../../image360/img3.gif';
+import img4 from '../../../image360/img4.gif';
+import img5 from '../../../image360/img5.gif';
+import img6 from '../../../image360/img6.gif';
+import img7 from '../../../image360/img7.gif';
+import img8 from '../../../image360/img8.gif';
+import img9 from '../../../image360/img9.gif';
+import img10 from '../../../image360/img10.gif';
+import img11 from '../../../image360/img11.gif';
+
+
+const arr360 = [
+	img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11
+];
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
@@ -30,6 +46,8 @@ export const ProductosList = () => {
 	const [items, setItems] = React.useState([]);
 
 	const [open, setOpen] = React.useState(false);
+	const [open360, setOpen360] = React.useState(false);
+
 	const [currentIndex, setCurrentIndex] = React.useState(0);
 
 	const handleClickOpen = (id) => {
@@ -37,8 +55,17 @@ export const ProductosList = () => {
 		setCurrentIndex(id);
 	};
 
+	const handle360ClickOpen = (id) => {
+		setOpen360(true);
+		setCurrentIndex(id);
+	};
+
 	const handleClose = () => {
 		setOpen(false);
+	};
+
+	const handleClose360 = () => {
+		setOpen360(false);
 	};
 
 	const handleChange = (event) => {
@@ -49,11 +76,11 @@ export const ProductosList = () => {
 				break;
 			case 1:
 				setAge(event.target.value);
-				setItems(productos.filter(x => x.id > 5));
+				setItems(productos.filter(x => x.id < 6));
 				break;
 			case 2:
 				setAge(event.target.value);
-				setItems(productos.filter(x => x.id < 6));
+				setItems(productos.filter(x => x.id > 5));
 				break;
 			default:
 				break;
@@ -67,7 +94,7 @@ export const ProductosList = () => {
     return (
       <Box sx={{ flexGrow: 1, padding: '20px' , paddingTop: '200px'}}>
 		  {console.log('productos', productos)}
-		<FormControl sx={{ width: '200px'}} >
+		<FormControl sx={{ width: '200px', background:'#ffffff'}} >
 			<InputLabel id="demo-simple-select-label">Sexo</InputLabel>
 			<Select
 				labelId="demo-simple-select-label"
@@ -94,6 +121,7 @@ export const ProductosList = () => {
 					price={producto.price}
 					id={producto.id}
 					handleClickOpen={() => handleClickOpen(index)}
+					handle360ClickOpen={() => handle360ClickOpen(index)}
 				/>
 			</Grid>
 			))
@@ -122,6 +150,25 @@ export const ProductosList = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cerrar</Button>
+        </DialogActions>
+      </Dialog>
+	  <Dialog
+        open={open360}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose360}
+        aria-describedby="alert-dialog-slide-description"
+		maxWidth="md"
+		fullWidth
+      >
+        <DialogTitle>{items[currentIndex]?.title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description" sx={{display: 'flex', justifyContent: 'space-around'}}>
+			<img width="500" src={arr360[currentIndex]} alt={"loading .."}/>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose360}>Cerrar</Button>
         </DialogActions>
       </Dialog>
     </Box>
