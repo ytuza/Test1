@@ -39,47 +39,47 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   });
 
 export const ProductosList = () => {
+
+	//recupero del context los productos
 	const value = useContext(DataContext)
 	const [productos] = value.productos;
 
-	const [age, setAge] = React.useState('');
+	//variable que muestra el filtro
+	const [filtro, setFiltro] = React.useState('');
+
+	//items que voy a renderizar
 	const [items, setItems] = React.useState([]);
 
-	const [open, setOpen] = React.useState(false);
+	//variable que me indica si abro o no el modal de 360 (-)
 	const [open360, setOpen360] = React.useState(false);
 
+	//variable que indica el indice q estoy haciendo click
 	const [currentIndex, setCurrentIndex] = React.useState(0);
 
-	const handleClickOpen = (id) => {
-		setOpen(true);
-		setCurrentIndex(id);
-	};
-
+	//funcion cuando hago clik en 360
 	const handle360ClickOpen = (id) => {
 		setOpen360(true);
 		setCurrentIndex(id);
 	};
-
-	const handleClose = () => {
-		setOpen(false);
-	};
-
+	
+	// func cuando cierro el modal 360
 	const handleClose360 = () => {
 		setOpen360(false);
 	};
 
+	//funcion se llama cuando cambio el formControl
 	const handleChange = (event) => {
 		switch (event.target.value) {
 			case 0:
-				setAge('');
+				setFiltro('');
 				setItems(productos);
 				break;
 			case 1:
-				setAge(event.target.value);
+				setFiltro(event.target.value);
 				setItems(productos.filter(x => x.id < 6));
 				break;
 			case 2:
-				setAge(event.target.value);
+				setFiltro(event.target.value);
 				setItems(productos.filter(x => x.id > 5));
 				break;
 			default:
@@ -87,19 +87,21 @@ export const ProductosList = () => {
 		}
 	};
 
+	
+	//edita items al inicializar la ventana 
 	React.useEffect(() => {
 		setItems(productos);
 	}, [productos])
 
     return (
       <Box sx={{ flexGrow: 1, padding: '20px' , paddingTop: '200px'}}>
-		  {console.log('productos', productos)}
+		  {console.log('items', items)}
 		<FormControl sx={{ width: '200px', background:'#ffffff'}} >
 			<InputLabel id="demo-simple-select-label">Sexo</InputLabel>
 			<Select
 				labelId="demo-simple-select-label"
 				id="demo-simple-select"
-				value={age}
+				value={filtro}
 				label="Sexo"
 				onChange={handleChange}
 			>
@@ -120,38 +122,12 @@ export const ProductosList = () => {
 					category={producto.category}
 					price={producto.price}
 					id={producto.id}
-					handleClickOpen={() => handleClickOpen(index)}
-					handle360ClickOpen={() => handle360ClickOpen(index)}
+					handle360ClickOpen={() => handle360ClickOpen(producto.id-1)}
 				/>
 			</Grid>
 			))
 		}
       </Grid>
-	  <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-		maxWidth="md"
-		fullWidth
-      >
-        <DialogTitle>{items[currentIndex]?.title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description" sx={{display: 'flex', justifyContent: 'space-around'}}>
-			<img width="500" src={items[currentIndex]?.image} alt={"loading .."}/>
-          </DialogContentText>
-		  <DialogContentText>
-		  	Suela de goma sintética importada. El eje mide aproximadamente 0-6
-			pulgadas desde el arco. La plataforma mide aproximadamente 1 pulgada. La
-			apertura de la bota mide aproximadamente 6-12 pulgadas alrededor de los
-			zapatos de ante inspirados en la corte con acolchado suave para una comodidad casual
-		  </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cerrar</Button>
-        </DialogActions>
-      </Dialog>
 	  <Dialog
         open={open360}
         TransitionComponent={Transition}
@@ -161,7 +137,8 @@ export const ProductosList = () => {
 		maxWidth="md"
 		fullWidth
       >
-        <DialogTitle>{items[currentIndex]?.title}</DialogTitle>
+		  {console.log(currentIndex, items)}
+        <DialogTitle>{productos[currentIndex]?.title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description" sx={{display: 'flex', justifyContent: 'space-around'}}>
 			<img width="500" src={arr360[currentIndex]} alt={"loading .."}/>

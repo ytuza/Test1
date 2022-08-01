@@ -68,7 +68,7 @@ export const ProductosDetalles = () => {
             url ? <img src={images} alt={detalle.title}/> : <img src={detalle.image} alt={detalle.title}/>
           }
           <input type="range" min="1" max="36" step="1" value={url} onChange={handleInput} />
-          <div className="description">
+          <div className="description" >
           <p><b>description: </b> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum necessitatibus soluta alias porro, saepe facere expedita asperiores quos fugit inventore ex, itaque sapiente quae pariatur beatae optio repellat aperiam quia possimus mollitia repellendus? Illo natus quam eaque impedit omnis pariatur!</p>
           <br/>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam vitae accusantium omnis, facere laudantium ipsa hic reprehenderit blanditiis quibusdam quos repellendus id illo reiciendis magni, aliquid beatae, consequatur sapiente! Sequi facere itaque,</p>

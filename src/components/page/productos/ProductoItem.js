@@ -5,8 +5,6 @@ import { DataContext } from "../../../context/DataProvider";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
@@ -27,7 +25,7 @@ export const ProductoItem = ({title, image, category, price, id, handleClickOpen
         image={image}
         alt="Paella dish"
       />
-      <CardContent sx={{height: '150px'}}>
+      <CardContent sx={{height: '180px'}}>
         <Typography gutterBottom variant="h5" component="div" >
           {title}
         </Typography>
@@ -39,15 +37,16 @@ export const ProductoItem = ({title, image, category, price, id, handleClickOpen
         </Typography>
         <Stack spacing={2} direction="row" sx={{zIndex:-10}}>
         <Button variant="text" onClick={() => addCarrito(id)}>Añadir al carrito</Button>
-        <Button variant="contained" onClick={handleClickOpen}
-          // href={`/producto/${id}`}
+        <Button variant="contained"
+          // onClick={handleClickOpen}
+          href={`/producto/${id}`}
         >Vista</Button>
         <Button variant="outlined" onClick={handle360ClickOpen}>
           360°
         </Button>
       </Stack>
       </CardContent>
-      <CardActions disableSpacing >
+      {/* <CardActions disableSpacing >
         <IconButton aria-label="add to favorites"
           onClick={
             ()=> color === 'inherit' ? setColor('error') : setColor('inherit')
@@ -58,7 +57,7 @@ export const ProductoItem = ({title, image, category, price, id, handleClickOpen
         <IconButton onClick={() => window.open('https://www.twitter.com')} aria-label="share">
           <ShareIcon />
         </IconButton>
-      </CardActions>
+      </CardActions> */}
     </Card>
   
   );

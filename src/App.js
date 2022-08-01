@@ -5,7 +5,7 @@ import {DataProvider} from './context/DataProvider';
 import { BrowserRouter as Router} from "react-router-dom";
 import Pages from "./components/Page.js";
 import "boxicons";
-import videoBg from '../src/image360/videoBg.mp4';
+import videoBg from '../src/image360/zapatilas.mp4';
 import { width } from '@mui/system';
 
 function App() {
